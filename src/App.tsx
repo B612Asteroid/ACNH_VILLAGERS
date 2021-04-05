@@ -5,7 +5,6 @@ import Animals from './components/Animals';
 
 
 function App() {
-  Animals();
   return (
     <div className="App">
       <header className="App-header">
@@ -16,6 +15,7 @@ function App() {
       </header>
       <nav>
         <p>Anial Crossing App</p>
+        <Animals/>
       </nav>
     </div>
   );
