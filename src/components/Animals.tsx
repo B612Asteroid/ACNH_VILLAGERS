@@ -2,12 +2,7 @@ import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
 import React from "react";
 
 
-
-interface AnimalDTO {
-  
-}
-
-class Animals extends React.Component<AnimalDTO> {
+class Animals extends React.Component {
   state = {
     animals : []
   };
