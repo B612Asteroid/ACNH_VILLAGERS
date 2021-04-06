@@ -1,8 +1,10 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
 import React from "react";
+import { Link } from "react-router-dom";
 
 
 class Animals extends React.Component {
+
   state = {
     animals : []
   };
@@ -12,7 +14,7 @@ class Animals extends React.Component {
     this.setState({
       animals : animals
     });
-    console.log(this.state.animals);
+    
   }
 
   async componentDidMount() {
@@ -37,7 +39,23 @@ class Animals extends React.Component {
   render() {
     const { animals } = this.state;
     return (
-      <div></div>
+      <div>
+        {
+          animals.map((animal) => {
+            return <section key={ animal['id'] }>
+              <Link to="/">
+                <div style={{ background : animal["bubble-color"] }}>
+                  <img alt={ animal['id'] } src={ animal["image_uri"] }/>
+                  <p style={{ color : animal["text-color"] }}>
+                    No. { animal['id'] } { animal['name']['name-KRko'] }
+                  </p>
+                </div> 
+              </Link>
+            </section>
+          })
+        }
+
+      </div>
     );
   }
 
