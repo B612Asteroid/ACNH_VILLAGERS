@@ -2,12 +2,28 @@ import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
 import React from "react";
 import { Link } from "react-router-dom";
 
+interface Animal {
+  no : string;
+  name : string;
+  kind : string;
+}
 
-class Animals extends React.Component {
+
+class Animals extends React.Component<Animal> {
+
+  constructor(props : Animal) {
+    super(props);
+  }
 
   state = {
     animals : []
   };
+
+  defaultProps : Animal = {
+    no : '',
+    name : '',
+    kind : ''
+  }
 
   mapAnimals (response : AxiosResponse) {
     let animals = Object.values(response.data);
@@ -43,14 +59,14 @@ class Animals extends React.Component {
         {
           animals.map((animal) => {
             return <section key={ animal['id'] }>
-              <Link to="/">
+              {/* <Link to="/"> */}
                 <div style={{ background : animal["bubble-color"] }}>
                   <img alt={ animal['id'] } src={ animal["image_uri"] }/>
                   <p style={{ color : animal["text-color"] }}>
                     No. { animal['id'] } { animal['name']['name-KRko'] }
                   </p>
                 </div> 
-              </Link>
+              {/* </Link> */}
             </section>
           })
         }
