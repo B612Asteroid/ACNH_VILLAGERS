@@ -13,17 +13,12 @@ class Animals extends React.Component<Animal> {
 
   constructor(props : Animal) {
     super(props);
+    console.log(this.props.name);
   }
 
   state = {
     animals : []
   };
-
-  defaultProps : Animal = {
-    no : '',
-    name : '',
-    kind : ''
-  }
 
   mapAnimals (response : AxiosResponse) {
     let animals = Object.values(response.data);
@@ -34,7 +29,7 @@ class Animals extends React.Component<Animal> {
   }
 
   async componentDidMount() {
-    const url = 'http://acnhapi.com/v1/villagers/';
+    const url = `http://acnhapi.com/v1/villagers/`;
     const option : AxiosRequestConfig = {
       url : url,
       method : 'get',

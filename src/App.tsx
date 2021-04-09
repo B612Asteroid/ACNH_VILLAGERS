@@ -5,9 +5,9 @@ import Animals from './components/Animals';
 
 class App extends React.Component {
 
-  private kind = React.createRef<HTMLSelectElement>();
-  private no = React.createRef<HTMLSelectElement>();
-  private name = React.createRef<HTMLInputElement>();
+  kind = React.createRef<HTMLSelectElement>();
+  no = React.createRef<HTMLSelectElement>();
+  name = React.createRef<HTMLInputElement>();
 
   state = {
     kind : "",
@@ -16,9 +16,14 @@ class App extends React.Component {
   };
 
   setAnimalProps(e : React.MouseEvent<HTMLButtonElement>) {
-    console.log(this.kind.current?.value);
-    console.log(this.no.current?.nodeValue);
-    console.log(this.name.current?.value);
+    this.setState(() => (
+      {
+        kind : this.kind.current!.value,
+        no : this.no.current!.value,
+        name : this.name.current!.value
+      }
+    ));
+    console.log(e);
   }
 
   render () {
@@ -39,7 +44,7 @@ class App extends React.Component {
             <option></option>
           </select>
           <input type="text" ref= { this.name }/>
-          <button onClick={this.setAnimalProps}>Search Villagers</button>
+          <button onClick={this.setAnimalProps.bind(this)}>Search Villagers</button>
           <br/>
           <Animals kind={this.state.kind} no={this.state.no} name={this.state.name}/>
         </nav>
