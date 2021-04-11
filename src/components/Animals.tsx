@@ -2,19 +2,11 @@ import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
 import React from "react";
 import { Link } from "react-router-dom";
 
-interface Animal {
-  no : string;
-  name : string;
-  kind : string;
-}
+class Animals extends React.Component {
 
-
-class Animals extends React.Component<Animal> {
-
-  constructor(props : Animal) {
-    super(props);
-    console.log(this.props.name);
-  }
+  kind = React.createRef<HTMLSelectElement>();
+  no = React.createRef<HTMLSelectElement>();
+  name = React.createRef<HTMLInputElement>();
 
   state = {
     animals : []
@@ -46,11 +38,32 @@ class Animals extends React.Component<Animal> {
       console.error(e);
     }
   }
+
+  setAnimalProps = (e : React.MouseEvent<HTMLButtonElement>) => {
+    this.kind.current!.value;
+    this.no.current!.value;
+    this.name.current!.value;    
+  }
   
   render() {
     const { animals } = this.state;
     return (
       <div>
+        <select ref={ this.kind } >
+          <option value=""></option>
+          <option value=""></option>
+          <option value=""></option>
+          <option value=""></option>
+        </select>
+        <select ref={ this.no }>
+          <option></option>
+          <option></option>
+          <option></option>
+          <option></option>
+        </select>
+        <input type="text" ref= { this.name }/>
+        <button onClick={this.setAnimalProps}>Search Villagers</button>
+        <br/> 
         {
           animals.map((animal) => {
             return <section key={ animal['id'] }>

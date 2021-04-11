@@ -1,7 +1,6 @@
 import React from 'react';
 import './App.css';
 import Animals from './components/Animals';
-import SearchAnimals from './components/SearchAnimals';
 
 
 class App extends React.Component {
@@ -11,7 +10,7 @@ class App extends React.Component {
       <div className="App">
         <nav>
           <h1>Anial Crossing App</h1>
-          <SearchAnimals/>
+          <Animals/>
         </nav>
       </div>
     );
