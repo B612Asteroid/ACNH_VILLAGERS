@@ -9,15 +9,20 @@ class Animals extends React.Component {
   name = React.createRef();
 
   state = {
-    animals : []
+    animals : [],
+    animalCounts : 0,
+    animalKinds : []
   };
 
   mapAnimals (response) {
     let animals = Object.values(response.data);
+    let kinds = new Set(animals.map((animal) => animal.species));
     this.setState({
-      animals : animals
+      animals : animals,
+      animalCounts : animals.length,
+      animalKinds : [...kinds]
     });
-    
+    console.log(this.state.animals);
   }
 
   async componentDidMount() {
@@ -39,35 +44,61 @@ class Animals extends React.Component {
     }
   }
 
-  setAnimalProps = (e) => {
-    if (this.kind.current) {
-      console.log(this.kind.current.value);
-    }
-    //this.no.current!.value;
-    //this.name.current!.value;
+  componentWillUnmount () {
+    this.setState({
+      animals : []
+    });
+  };
+
+  setAnimalProps = () => {
     this.setState((prevState) => {
-      
+      let prevAnimals = prevState.animals;
+      if (this.name.current.value !== '') {
+        prevAnimals = prevState.animals.filter(
+          (animal) => animal.name['name-KRko'].indexOf(this.name.current.value) !== -1
+        );
+      }
+      return {
+        animals : prevAnimals
+      }
     });    
-  }
+  };
   
+  setAnimalCountsToSelectOptions = () => {
+    const { animalCounts } = this.state;
+    const count = 20;
+    let options = [];
+    for (let i = 0; i <= animalCounts; i+= count) {
+      let start = i + 1;
+      let end = start + (count - 1);
+      if (end > animalCounts) end = animalCounts;
+      options.push(<option value={`${i}-${end - 1}`}>{`${start} ~ ${end}`}</option>)
+    }
+    return options;
+  }
+
   render() {
-    const { animals } = this.state;
+    const { animals, animalKinds } = this.state;
     return (
       <div>
-        <select ref={ this.kind } >
-          <option value=""></option>
-          <option value=""></option>
-          <option value=""></option>
-          <option value=""></option>
-        </select>
+        <label >No. </label>
         <select ref={ this.no }>
-          <option></option>
-          <option></option>
-          <option></option>
-          <option></option>
+          {
+           this.setAnimalCountsToSelectOptions()
+          }
         </select>
+        <label >Kind </label>
+        <select ref={ this.kind }>
+          {
+            animalKinds.map(kind => {
+              return <option value={ kind }>{ kind }</option>
+            })
+          }
+        </select>
+        <label >Name. </label>
         <input type="text" ref= { this.name }/>
         <button onClick={this.setAnimalProps}>Search Villagers</button>
+        <br/>
         <br/> 
         {
           animals.map((animal) => {
