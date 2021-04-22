@@ -136,12 +136,10 @@ class Animals extends React.Component {
                     </p>
                   </div> 
                 </Link>
-                
               </section>
             )
           })
         }
-
       </div>
     );
   }
