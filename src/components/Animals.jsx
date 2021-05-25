@@ -1,6 +1,6 @@
 import axios from "axios";
 import React from "react";
-import AnimalNode from "ani"
+import AnimalNode from "./AnimalNode"
 
 
 class Animals extends React.Component {

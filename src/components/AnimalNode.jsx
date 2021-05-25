@@ -1,4 +1,3 @@
-import axios from "axios";
 import React from "react";
 import { Link } from "react-router-dom";
 
@@ -14,7 +13,7 @@ class AnimalNode extends React.Component {
             id : id
           }}>
           <div style={{ background : bubbleColor }}>
-            <img alt={imageUri} src={ imageUri }/>
+            <img alt={ nameKr } src={ imageUri }/>
             <p style={{ color : textColor }}>
               No. { id } { nameKr }
             </p>
