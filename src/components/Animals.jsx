@@ -1,6 +1,6 @@
 import axios from "axios";
 import React from "react";
-import { Link } from "react-router-dom";
+import AnimalNode from "ani"
 
 
 class Animals extends React.Component {
@@ -125,17 +125,13 @@ class Animals extends React.Component {
           animals.map((animal) => {
             return (
               <section key={ animal.id }>
-                <Link to={{
-                    pathname : `/Animal/${ animal.id }`,
-                    id : animal.id
-                  }}>
-                  <div style={{ background : animal["bubble-color"] }}>
-                    <img alt={animal["image_uri"]} src={ animal["image_uri"] }/>
-                    <p style={{ color : animal["text-color"] }}>
-                      No. { animal['id'] } { animal['name']['name-KRko'] }
-                    </p>
-                  </div> 
-                </Link>
+                <AnimalNode 
+                  id={animal.id} 
+                  bubbleColor={animal["bubble-color"]}
+                  imageUri={animal["image_uri"]}
+                  textColor={animal["text-color"]}
+                  nameKr={animal["name"]["name-KRko"]}
+                />
               </section>
             )
           })
