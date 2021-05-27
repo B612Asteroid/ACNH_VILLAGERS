@@ -43,12 +43,22 @@ class Animal extends React.Component {
                     No. { animal['id'] } { animal['name']['name-KRko'] }
                 </p>
                 <img alt={animal["image_uri"]} src={ animal["image_uri"] }/>
-            </div> 
+                <br/>
+                <div style={{ color : animal["text-color"] }}>
+                    <p>personality : {animal["personality"]}</p>
+                    <p>birthday : {animal["birthday"]}</p>
+                    <p>species : {animal["species"]}</p>
+                    <p>gender : {animal["gender"]}</p>
+                    <p>subtype : {animal["subtype"]}</p>
+                    <p>hobby : {animal["hobby"]}</p>
+                    <p>catch-phrase : {animal["catch-translations"]["catch-KRko"]}</p>
+                </div>
+            </div>
         )
     }
 
     render () {
-        const {animal} = this.state;
+        const { animal } = this.state;
         
         return (
             <section>
