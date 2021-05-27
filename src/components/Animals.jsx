@@ -1,13 +1,11 @@
 import axios from "axios";
 import React from "react";
-import AnimalNode from "./AnimalNode"
+import AnimalNode from "./AnimalNode";
+import AnimalCount from "./AnimalCounts";
+import AnimalKind from "./AnimalKind";
 
 
 class Animals extends React.Component {
-
-  kind = React.createRef();
-  no = React.createRef();
-  name = React.createRef();
 
   state = {
     animals : [],
@@ -15,6 +13,8 @@ class Animals extends React.Component {
     animalCounts : 0,
     animalKinds : []
   };
+
+  search = {};
 
   mapAnimals (response) {
     let animals = Object.values(response.data);
@@ -56,23 +56,25 @@ class Animals extends React.Component {
     });
   };
 
-  setAnimalProps = () => {
+  setAnimalProps = (e) => {
+    this.search[e.target.name] = e.target.value;
+    let {no, name, kind} = this.search;
     this.setState((prevState) => {
       let prevAnimals = prevState.animalDatas;
-      if (this.no.current && this.no.current.value !== '') {
-        let noValues = this.no.current.value.split("-");
+      if (no && no !== '') {
+        let noValues = no.split("-");
         prevAnimals = prevAnimals.slice(noValues[0], noValues[1]);
       }
 
-      if(this.kind.current && this.kind.current.value !== '') {
+      if(kind && kind !== '') {
         prevAnimals = prevAnimals.filter(
-          (animal) => animal.species.indexOf(this.kind.current.value) !== -1
+          (animal) => animal.species.indexOf(kind) !== -1
         );
       }
 
-      if (this.name.current && this.name.current.value !== '') {
+      if (name && name !== '') {
         prevAnimals = prevAnimals.filter(
-          (animal) => animal.name['name-KRko'].indexOf(this.name.current.value) !== -1
+          (animal) => (animal.name['name-KRko']).indexOf(name) !== -1
         );
       }
       return {
@@ -81,44 +83,22 @@ class Animals extends React.Component {
     });    
   };
 
-  setAnimalCountsToSelectOptions = () => {
-    const { animalCounts } = this.state;
-    const count = 20;
-    let options = [];
-    for (let i = 0; i <= animalCounts; i+= count) {
-      let start = i + 1;
-      let end = start + (count - 1);
-      if (end > animalCounts) end = animalCounts;
-      options.push(<option key={i} value={`${i}-${end}`}>{`${start} ~ ${end}`}</option>)
-    }
-    return options;
-  };
-
   render() {
-    const { animals, animalKinds } = this.state;
+    const { animals, animalKinds, animalCounts } = this.state;
     return (
       <div>
-        <label >No. </label>
-        <select ref={ this.no }>
-          <option value=''></option>
-          {
-           this.setAnimalCountsToSelectOptions()
-          }
-        </select>
+        <AnimalCount 
+          onSelectChange={ this.setAnimalProps } 
+          animalCounts={ animalCounts }
+        />
         &nbsp;
-        <label >Kind. </label>
-        <select ref={ this.kind }>
-          <option value=""></option>
-          {
-            animalKinds.map((kind, idx) => {
-              return <option key={ idx } value={ kind }>{ kind }</option>
-            })
-          }
-        </select>
+        <AnimalKind 
+          onSelectChange={ this.setAnimalProps }
+          animalKinds={ animalKinds }
+        />
         &nbsp;
         <label >Name. </label>
-        <input type="text" ref= { this.name }/>
-        <button onClick={this.setAnimalProps}>Search Villagers</button>
+        <input type="text" name="name" onChange={ this.setAnimalProps }/>
         <br/>
         <br/> 
         {
