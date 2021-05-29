@@ -8,7 +8,7 @@ class AnimalKind extends React.Component {
         return (
             <div>
                 <label >Kind. </label>
-                <select onChange={ onSelectChange } name="kind">
+                <select onChange={ onSelectChange } name="kind" className="AnimalInput">
                     <option value=""></option>
                     {
                         animalKinds.map((kind, idx) => {

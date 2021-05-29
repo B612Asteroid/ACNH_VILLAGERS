@@ -1,5 +1,5 @@
 import React from 'react';
-import './App.css';
+import './css/App.css';
 import Animals from './components/Animals';
 import Animal from './components/Animal';
 import PageNotFound from './components/PageNotFound';
@@ -9,7 +9,7 @@ function App() {
   return (
     <div className="App">
       <nav>
-        <h1>Animal Crossing App</h1>
+        <div className="appHeader">Animal Crossing App</div>
         <BrowserRouter>
           <Switch>
             <Route exact path="/" component={Animals} />

@@ -1,4 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@700&display=swap');
+
+body {
+  background-color: #fff9e4;
+  color: #7e725c;
+}
+
+.appHeader {
+  font-family: 'Quicksand', sans-serif;
+  font-size: 32px;
+  letter-spacing: 0.5px;
+  margin: 10px;
+
+}
+
 .App {
+  
   text-align: center;
 }
 

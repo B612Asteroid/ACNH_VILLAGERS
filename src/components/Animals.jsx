@@ -3,7 +3,7 @@ import React from "react";
 import AnimalNode from "./AnimalNode";
 import AnimalCount from "./AnimalCounts";
 import AnimalKind from "./AnimalKind";
-
+import '../css/animal.css';
 
 class Animals extends React.Component {
 
@@ -87,35 +87,39 @@ class Animals extends React.Component {
     const { animals, animalKinds, animalCounts } = this.state;
     return (
       <div>
-        <AnimalCount 
-          onSelectChange={ this.setAnimalProps } 
-          animalCounts={ animalCounts }
-        />
-        &nbsp;
-        <AnimalKind 
-          onSelectChange={ this.setAnimalProps }
-          animalKinds={ animalKinds }
-        />
-        &nbsp;
-        <label >Name. </label>
-        <input type="text" name="name" onChange={ this.setAnimalProps }/>
-        <br/>
-        <br/> 
-        {
-          animals.map((animal) => {
-            return (
-              <section key={ animal.id }>
-                <AnimalNode 
-                  id={animal.id} 
-                  bubbleColor={animal["bubble-color"]}
-                  imageUri={animal["image_uri"]}
-                  textColor={animal["text-color"]}
-                  nameKr={animal["name"]["name-KRko"]}
-                />
-              </section>
-            )
-          })
-        }
+        <div className='SearchArea'>
+          <AnimalCount 
+            onSelectChange={ this.setAnimalProps } 
+            animalCounts={ animalCounts }
+          />
+
+          <AnimalKind 
+            onSelectChange={ this.setAnimalProps }
+            animalKinds={ animalKinds }
+          />
+          <div>
+            <label >Name. </label>
+            <input type="text" name="name" onChange={ this.setAnimalProps } className="AnimalInput"/>
+          </div>
+        </div>
+
+        <div className="contentArea">
+          {
+            animals.map((animal) => {
+              return (
+                <section key={ animal.id }>
+                  <AnimalNode 
+                    id={ animal.id } 
+                    bubbleColor={ animal["bubble-color"] }
+                    imageUri={ animal["image_uri"] }
+                    textColor={ animal["text-color"] }
+                    nameKr={ animal["name"]["name-KRko"] }
+                  />
+                </section>
+              )
+            })
+          }
+        </div> 
       </div>
     );
   }

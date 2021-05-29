@@ -11,12 +11,12 @@ class AnimalNode extends React.Component {
         <Link to={{
             pathname : `/Animal/${ id }`,
             id : id
-          }}>
-          <div style={{ background : bubbleColor }}>
-            <img alt={ nameKr } src={ imageUri }/>
-            <p style={{ color : textColor }}>
-              No. { id } { nameKr }
-            </p>
+          }} style={{"text-decoration": "none" }}>
+          <div style={{ background : bubbleColor }} className="AnimalBlock">
+            <img alt={ nameKr } src={ imageUri } className="AnimalImg"/>
+            <div style={{ color : textColor }} className="AnimalName">
+                No. { id } { nameKr }
+            </div>
           </div> 
         </Link>
       </div>

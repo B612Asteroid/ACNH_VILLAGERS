@@ -22,7 +22,7 @@ class AnimalCount extends React.Component {
         return (
             <div>
                 <label >No. </label>
-                <select name="no" onChange={ onSelectChange }>
+                <select name="no" onChange={ onSelectChange } className="AnimalInput">
                     <option value=''></option>
                     {
                         this.setAnimalCountsToSelectOptions()
